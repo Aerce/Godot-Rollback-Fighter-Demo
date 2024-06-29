@@ -411,13 +411,14 @@ func get_hit():
 		if hitbox_index != -1:
 			hitbox.owner.hit_tracker[hitbox_index] = true
 		if !blocked_all_hits:
-			final_hit_behavior = hitbox.hit_behavior
-			final_hitbox = hitbox
+			if grounded:
+				final_hit_behavior = hitbox.hit_behavior
+				final_hitbox = hitbox
+			else: 
+				final_hit_behavior = hitbox.air_hit_behavior
+				final_hitbox = hitbox
 		else:
 			final_hit_behavior = hitbox.block_behavior
-			final_hitbox = hitbox
-		if !grounded:
-			final_hit_behavior = hitbox.air_hit_behavior
 			final_hitbox = hitbox
 		
 	#After the final hit behavior has been determined, we apply changes to the fighter
